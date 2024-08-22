@@ -1,0 +1,42 @@
+---
+// Supports weights 100-900
+import "@fontsource-variable/nunito";
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { description, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"
+    ></script>
+  </body>
+
+  <style is:global>
+    :root {
+      --primary-color: #e21150;
+      --blue-color: #2e73c7;
+      --backgroud-color: #ededed;
+      --button-color: #0067b1;
+      --error-fonts-color: #bb1b47;
+      --opciones-color: #707070;
+    }
+
+    html {
+      font-family: "Nunito Variable", sans-serif;
+    }
+  </style>
+</html>
