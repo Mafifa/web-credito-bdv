@@ -3,6 +3,15 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "baseUrl": "./src/",
+    "paths": {
+      "@images": [
+        "images/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ]
+    }
   }
 }

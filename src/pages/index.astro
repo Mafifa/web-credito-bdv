@@ -1,10 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import BDV from "../images/BDV-logo.png";
+import LogIn from "@components/LogIn";
 ---
 
 <Layout
-  title="BDVenlinea Creditos"
+  title="BDVenlinea Credito"
   description="Pagina principal de creditos del Banco de Veneuzela"
 >
-  <main></main>
+  <main class="grid grid-cols-1 items-center justify-center self-center m-4">
+    <div
+      class="grid grid-cols-1 items-center p-8 m-4 bg-white max-w-screen-sm mx-auto shadow-md rounded-md"
+    >
+      <Image
+        class="max-w-44 mx-auto"
+        src={BDV}
+        alt="Logo del banco nacional de venezuela"
+      />
+      <LogIn client:load />
+
+      <div class="grid grid-cols-1 items-center gap-y-1">
+        <a
+          class="font-bold text-center text-sm text-pretty"
+          href="https://bdvenlinea.banvenez.com/gestion-usuario"
+          >¿Olvidaste tu usuario o clave?
+        </a>
+        <a
+          class="font-bold text-center text-sm text-pretty"
+          href="https://bdvenlinea.banvenez.com/gestion-usuario"
+        >
+          Si eres nuevo clienteBDV
+          <br />
+          regístrate aquí
+        </a>
+      </div>
+    </div>
+  </main>
 </Layout>
