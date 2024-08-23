@@ -7,11 +7,19 @@ import LogIn from "@components/LogIn";
 
 <Layout
   title="BDVenlinea Credito"
-  description="Pagina principal de creditos del Banco de Veneuzela"
+  description="Pagina principal de creditos del Banco de Venezuela"
 >
-  <main class="grid grid-cols-1 items-center justify-center self-center m-4">
+  <main class="m-4 md:m-0 relative z-0">
+    <!-- Fondo de pantalla -->
     <div
-      class="grid grid-cols-1 items-center p-8 m-4 bg-white max-w-screen-sm mx-auto shadow-md rounded-md"
+      class="bg-cover bg-center fixed inset-0 w-full h-full z-0 invisible md:visible"
+      style="background-image: url(./images/yulimarRojas.png);"
+    >
+    </div>
+
+    <!-- Contenido principal -->
+    <div
+      class="grid grid-cols-1 items-center p-8 m-4 bg-white max-w-[398px] mx-auto shadow-black/10 shadow-lg rounded-md relative z-10 md:ml-0 md:left-32 md:top-20"
     >
       <Image
         class="max-w-44 mx-auto"
@@ -30,9 +38,7 @@ import LogIn from "@components/LogIn";
           class="font-bold text-center text-sm text-pretty"
           href="https://bdvenlinea.banvenez.com/gestion-usuario"
         >
-          Si eres nuevo clienteBDV
-          <br />
-          regístrate aquí
+          Si eres nuevo clienteBDV regístrate aquí
         </a>
       </div>
     </div>

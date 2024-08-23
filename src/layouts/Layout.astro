@@ -15,10 +15,10 @@ const { description, title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-[#ededed] lg:bg-white">
     <slot />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"
@@ -33,11 +33,11 @@ const { description, title } = Astro.props;
       --button-color: #0067b1;
       --error-fonts-color: #bb1b47;
       --opciones-color: #707070;
+      --color-prueba: #00000042;
     }
 
     html {
       font-family: "Nunito Variable", sans-serif;
-      background-color: var(--backgroud-color);
     }
     a {
       color: var(--opciones-color);
