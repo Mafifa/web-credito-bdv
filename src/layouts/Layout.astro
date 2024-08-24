@@ -33,6 +33,11 @@ const { description, title } = Astro.props;
       --color-prueba: #00000042;
     }
 
+    input:focus,
+    select:focus {
+      outline: none; /* Elimina el borde de enfoque */
+    }
+
     html {
       font-family: "Nunito Variable", sans-serif;
     }

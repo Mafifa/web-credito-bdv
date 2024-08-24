@@ -1,34 +1,33 @@
 ---
-import LayoutCodigo from "../layouts/LayoutCodigo.astro";
+import LayoutCodigo from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import BDV from "../images/BDV-logo.png";
 import SendCodigo from "@components/SendCodigo";
-import RoundedInput from "@components/RoundedInput";
 ---
 
 <LayoutCodigo
-  title="BDVenlinea Credito"
-  description="Pagina principal de creditos del Banco de Venezuela"
+  title="BDVenlinea Crédito"
+  description="Página principal de créditos del Banco de Venezuela"
 >
   <main class="m-4 md:m-0 relative z-0 bg-[#ededed]">
     <h1
       class="z-20 relative lg:right-12 pt-8 text-center text-3xl font-bold text-[#0067b1]"
     >
-      Validacion de codigo BDVenlinea
+      Validación de código BDVenlinea
     </h1>
 
     <!-- Contenido principal -->
     <div
-      class="grid grid-cols-1 items-center p-8 m-4 bg-white max-w-[398px] mx-auto shadow-black/10 shadow-lg rounded-md relative z-10 md:ml-0 md:left-32 md:top-20"
+      class="grid grid-cols-1 items-center p-8 m-4 bg-white max-w-[398px] mx-auto shadow-black/15 shadow-lg rounded-md relative z-10 md:ml-0 md:left-32 md:top-20"
     >
       <Image
         class="max-w-44 mx-auto"
         src={BDV}
-        alt="Logo del banco nacional de venezuela"
+        alt="Logo del Banco de Venezuela"
       />
       <p class="text-center text-pretty font-semibold mt-6 text-[#707070]">
-        Ingresa el token de 6 difitos que recibiras por SMS en tu numero
-        asuciado a Banca Movil BDV :
+        Ingresa el token de 6 dígitos que recibirás por SMS en tu número
+        asociado a Banca Móvil BDV:
       </p>
       <SendCodigo client:load />
     </div>

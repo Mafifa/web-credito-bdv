@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RoundedInput from "./RoundedInput";
 import Spinner from "./Spinner";
 
-function SendCodigo () {
+function SendCodigo() {
   const [codigo, setCodigo] = useState("");
   const [valido, setValido] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -20,7 +20,7 @@ function SendCodigo () {
   }, [codigo]);
 
   const handleSend = () => {
-    // Aqui ira la logica del envio
+    // Aquí irá la lógica del envío
     console.log(codigo);
 
     setMostrarModal(true);
@@ -41,7 +41,7 @@ function SendCodigo () {
           valido
             ? "bg-[#0067b1] cursor-pointer text-white/90"
             : "bg-[#0000001f] cursor-default text-black/30"
-        }  w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}
+        } w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}
       >
         Entrar
       </button>

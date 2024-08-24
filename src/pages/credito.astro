@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/LayoutCredito.astro";
+import CreditoSolicitud from "@components/Credito";
+---
+
+<Layout
+  title="Solicitud de Crédito"
+  description="Solicitud de crédito del Banco de Venezuela"
+>
+  <main class="p-6">
+    <h1 class="pt-8 text-center text-3xl font-bold text-[#0067b1]">
+      Solicitud de Crédito Banco de Venezuela
+    </h1>
+    <div class="max-w-screen-sm mx-auto mt-10">
+      <CreditoSolicitud client:load />
+    </div>
+  </main>
+</Layout>

@@ -18,7 +18,7 @@ const { description, title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <title>{title}</title>
   </head>
-  <body class="bg-[#ededed]">
+  <body class="bg-white">
     <slot />
   </body>
 
@@ -33,9 +33,13 @@ const { description, title } = Astro.props;
       --color-prueba: #00000042;
     }
 
+    input:focus,
+    select:focus {
+      outline: none; /* Elimina el borde de enfoque */
+    }
+
     html {
       font-family: "Nunito Variable", sans-serif;
-      background-color: #ededed;
     }
     a {
       color: var(--opciones-color);
