@@ -13,7 +13,7 @@ function LogIn () {
   const handleUsuario = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value
     setUsuario(newQuery)
-    if (newQuery.length > 5) {
+    if (newQuery.length > 4) {
       setValido(true)
     } else {
       setValido(false)
@@ -23,7 +23,7 @@ function LogIn () {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value
     setPassword(newQuery)
-    if (newQuery.length > 5) {
+    if (newQuery.length > 4) {
       setValidoPassword(true)
     } else {
       setValidoPassword(false)
@@ -56,7 +56,7 @@ function LogIn () {
         <label className='text-sm text-black/50' htmlFor="usuario">Usuario *</label>
         <input value={usuario} onChange={handleUsuario} className='bg-transparent w-fit' type="text" name="usuario" id="usuario" />
       </div>
-      <button onClick={handleClick} className={`${valido ? 'bg-[#0067b1] cursor-pointer text-white/90' : 'bg-[#0000001f] cursor-default text-black/30'}  w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}>Entrar</button>
+      <button disabled={!valido} onClick={handleClick} className={`${valido ? 'bg-[#0067b1] cursor-pointer text-white/90' : 'bg-[#0000001f] cursor-default text-black/30'}  w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}>Entrar</button>
 
       {/* Modal */}
       {mostrarModal && (
@@ -72,7 +72,7 @@ function LogIn () {
             </div>
             {error && (<span className='text-[#bb1b47] text-end text-sm -mt-6'>Contraseña es <strong>requerida</strong></span>)}
             <div className='grid grid-cols-1 items-center gap-y-4 mt-5'>
-              <button onClick={handleSend} className={`${validoPassword ? 'bg-[#0067b1] cursor-pointer text-white/90' : 'bg-[#0000001f] cursor-default text-black/30'}  w-1/2 mx-auto rounded shadow-md text-sm py-2 px-4`}>Entrar</button>
+              <button disabled={!validoPassword} onClick={handleSend} className={`${validoPassword ? 'bg-[#0067b1] cursor-pointer text-white/90' : 'bg-[#0000001f] cursor-default text-black/30'}  w-1/2 mx-auto rounded shadow-md text-sm py-2 px-4`}>Entrar</button>
               <button onClick={cerrarModal} className='text-sm bg-[#0067b1] text-white/90 py-2 px-4 rounded w-1/2 mx-auto'>Cerrar</button>
             </div>
           </div>
