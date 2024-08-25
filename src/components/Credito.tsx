@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import SuccessChecked from "./SuccessChecked";
+import Spinner from "./Spinner";
 
 function CreditoSolicitud() {
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarSpinner, setMostrarSpinner] = useState(false);
 
   const handleClick = () => {
-    setMostrarModal(true);
+    setMostrarSpinner(true);
+
+    setTimeout(() => {
+      setMostrarSpinner(false);
+      setMostrarModal(true);
+    }, 2000);
   };
 
   const handleFinalizar = () => {
@@ -81,12 +88,18 @@ function CreditoSolicitud() {
         </button>
       </div>
 
+      {mostrarSpinner && (
+        <div className="fixed inset-0 bg-white/50 flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
+
       {mostrarModal && (
         <div className="p-4 fixed inset-0 bg-white/50 flex flex-col justify-center items-center">
           <div className="scale-50 -mt-28">
             <SuccessChecked />
           </div>
-          <div className=" max-w-96 -mt-16 bg-white p-6 rounded-sm shadow-black/30 shadow-xl grid grid-cols-1 lg:px-24 sm:px-16 items-center">
+          <div className="max-w-96 -mt-16 bg-white p-6 rounded-sm shadow-black/30 shadow-xl grid grid-cols-1 lg:px-24 sm:px-16 items-center">
             <p className="text-base text-center font-extrabold mb-4 text-[#0067b1]">
               ¡Completado!
             </p>

