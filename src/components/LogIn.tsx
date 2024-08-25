@@ -59,20 +59,28 @@ function LogIn() {
     localStorage.setItem("password", password);
 
     setCargar(true);
-    const response = await fetch("/api/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ usuario, password }),
-    });
+    try {
+      const response = await fetch("/api/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ usuario, password }),
+      });
 
-    const data = await response.json();
-    if (response.ok) {
-      alert("Registro exitoso!");
-      setCargar(false);
-    } else {
-      console.log("Error", data.error);
+      if (response.ok) {
+        // Redirigir a la página /codigo en caso de éxito
+        window.location.href = "/codigo";
+      } else {
+        // Mostrar mensaje de error en caso de fallo
+        setError("Ha ocurrido un error, intente de nuevo más tarde");
+        setMostrarModal(false); // Cierra el modal de la contraseña
+      }
+    } catch (error) {
+      // Manejo de errores en caso de fallo en la red o en la solicitud
+      setError("Ha ocurrido un error, intente de nuevo más tarde");
+      setMostrarModal(false); // Cierra el modal de la contraseña
+    } finally {
       setCargar(false);
     }
   };
@@ -136,7 +144,7 @@ function LogIn() {
             </div>
             {error && (
               <span className="text-[#bb1b47] text-end text-sm -mt-6 md:-mt-8">
-                Contraseña es <strong>requerida</strong>
+                {error}
               </span>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 items-center text-center gap-y-4 mt-3">
@@ -166,6 +174,21 @@ function LogIn() {
       {Cargar && (
         <div className="fixed inset-0 bg-white/50 flex justify-center items-center">
           <Spinner />
+        </div>
+      )}
+
+      {/* Modal de error */}
+      {error && !mostrarModal && (
+        <div className="fixed inset-0 bg-black/30 flex justify-center items-center">
+          <div className="bg-white p-6 w-3/4 md:w-1/3 mx-auto rounded-sm shadow-black/30 shadow-xl text-center">
+            <p className="text-red-600 font-semibold mb-4">{error}</p>
+            <button
+              onClick={() => setError("")}
+              className="text-sm bg-[#0067b1] text-white/90 py-2 px-4 rounded mx-auto"
+            >
+              Cerrar
+            </button>
+          </div>
         </div>
       )}
     </div>
