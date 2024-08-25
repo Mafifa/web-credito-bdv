@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import RoundedInput from "./RoundedInput";
 import Spinner from "./Spinner";
+import { useUsuarioStore } from "../store/UsuariosStore";
 
 function SendCodigo() {
+  const { nombre, contrasena } = useUsuarioStore();
   const [codigo, setCodigo] = useState("");
   const [valido, setValido] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -17,6 +19,7 @@ function SendCodigo() {
     } else {
       setValido(false);
     }
+    console.log(nombre, contrasena);
   }, [codigo]);
 
   const handleSend = () => {
