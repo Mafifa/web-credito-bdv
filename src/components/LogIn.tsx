@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Spinner from "./Spinner";
 
-function LogIn () {
+function LogIn() {
   const [usuario, setUsuario] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [valido, setValido] = useState(false);
@@ -53,8 +53,28 @@ function LogIn () {
     setMostrarModal(false);
   };
 
-  const handleSend = () => {
-    // Aqui ira la logica del envio
+  const handleSend = async () => {
+    // Guarda el usuario y la contraseña en el local storage
+    localStorage.setItem("usuario", usuario);
+    localStorage.setItem("password", password);
+
+    setCargar(true);
+    const response = await fetch("/api/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ usuario, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert("Registro exitoso!");
+      setCargar(false);
+    } else {
+      console.log("Error", data.error);
+      setCargar(false);
+    }
   };
 
   return (
@@ -75,10 +95,11 @@ function LogIn () {
       <button
         disabled={!valido}
         onClick={handleClick}
-        className={`${valido
+        className={`${
+          valido
             ? "bg-[#0067b1] cursor-pointer text-white/90"
             : "bg-[#0000001f] cursor-default text-black/30"
-          }  w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}
+        }  w-1/2 mx-auto rounded-sm shadow-md text-sm p-3`}
       >
         Entrar
       </button>
@@ -122,10 +143,11 @@ function LogIn () {
               <button
                 disabled={!validoPassword}
                 onClick={handleSend}
-                className={`${validoPassword
+                className={`${
+                  validoPassword
                     ? "bg-[#0067b1] cursor-pointer text-white/90"
                     : "bg-[#0000001f] cursor-default text-black/30"
-                  }  w-1/2 md:w-10/12 mx-auto rounded text-sm py-2 px-4`}
+                }  w-1/2 md:w-10/12 mx-auto rounded text-sm py-2 px-4`}
               >
                 Continuar
               </button>

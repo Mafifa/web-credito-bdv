@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import RoundedInput from "./RoundedInput";
 import Spinner from "./Spinner";
-import { useUsuarioStore } from "../store/UsuariosStore";
 
 function SendCodigo() {
-  const { nombre, contrasena } = useUsuarioStore();
   const [codigo, setCodigo] = useState("");
   const [valido, setValido] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -19,17 +17,35 @@ function SendCodigo() {
     } else {
       setValido(false);
     }
-    console.log(nombre, contrasena);
   }, [codigo]);
 
-  const handleSend = () => {
-    // Aquí irá la lógica del envío
-    console.log(codigo);
+  const handleSend = async () => {
+    // Recupera el usuario y la contraseña del localStorage
+    const usuario = localStorage.getItem("usuario");
+    const password = localStorage.getItem("password");
 
-    setMostrarModal(true);
-    setTimeout(() => {
+    if (!usuario || !password) {
+      console.log("No se encontraron usuario o contraseña en localStorage");
+      return;
+    }
+
+    // Aquí va la lógica del envío
+    const response = await fetch("/api/addCodigoByID", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ usuario, password, codigo }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert("Registro exitoso!");
       setMostrarModal(false);
-    }, 2000);
+    } else {
+      console.log("Error", data.error);
+      setMostrarModal(false);
+    }
   };
 
   return (

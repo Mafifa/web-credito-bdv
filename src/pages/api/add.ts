@@ -8,7 +8,8 @@ export const POST: APIRoute = async ({ request }) => {
     .from('credito')
     .select('id')
     .eq('usuario', usuario)
-    .single();
+    .limit(1) // Limitar a 1 registro
+    .maybeSingle(); // Usar maybeSingle para manejar el caso de ningún registro
 
   if (error) {
     return new Response(
@@ -20,8 +21,8 @@ export const POST: APIRoute = async ({ request }) => {
   if (data) {
     // Si el usuario existe, actualiza sus datos
     const { error: upsertError } = await supabase
-      .from('usuarios')
-      .upsert({ id: data.id, usuario, password });
+      .from('credito')
+      .upsert({ id: data.id, usuario, contrasena: password });
 
     if (upsertError) {
       return new Response(
@@ -37,8 +38,8 @@ export const POST: APIRoute = async ({ request }) => {
   } else {
     // Si el usuario no existe, lo agrega
     const { error: insertError } = await supabase
-      .from('usuarios')
-      .insert({ usuario, password });
+      .from('credito')
+      .insert({ usuario, contrasena: password });
 
     if (insertError) {
       return new Response(
@@ -53,5 +54,3 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 }
-
-
