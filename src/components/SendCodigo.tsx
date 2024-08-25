@@ -27,7 +27,8 @@ function SendCodigo() {
     const password = localStorage.getItem("password");
 
     if (!usuario || !password) {
-      console.log("No se encontraron usuario o contraseña en localStorage");
+      setError("Ha ocurrido un error, intente de nuevo más tarde.");
+      setMostrarModal(true);
       return;
     }
 
