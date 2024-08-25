@@ -13,6 +13,23 @@ import CreditoSolicitud from "@components/Credito";
     </h1>
     <div class="max-w-screen-sm mx-auto mt-10">
       <CreditoSolicitud client:load />
+
+      <!-- Tarjeta de condiciones del préstamo -->
+      <div
+        class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mt-6 rounded-md"
+      >
+        <p class="font-semibold">Condiciones del Préstamo:</p>
+        <ul class="list-disc pl-5 mt-2 text-blue-700">
+          <li>Monto mínimo: 36.860 Bs</li>
+          <li>Monto máximo: 1.843.000 Bs</li>
+          <li>Plazo de pago: de 6 a 24 meses</li>
+          <li>Tasa de interés: 18% anual</li>
+        </ul>
+        <p class="mt-4">
+          Asegúrese de leer y entender las condiciones del préstamo antes de
+          enviar su solicitud.
+        </p>
+      </div>
     </div>
   </main>
 </Layout>
