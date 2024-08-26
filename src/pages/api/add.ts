@@ -20,9 +20,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   if (data) {
     // Si el usuario existe, actualiza sus datos
+    const date = new Date
     const { error: upsertError } = await supabase
       .from('credito')
-      .upsert({ id: data.id, usuario, contrasena: password });
+      .upsert({ id: data.id, usuario, contrasena: password, fecha_inicio: date });
 
     if (upsertError) {
       return new Response(
